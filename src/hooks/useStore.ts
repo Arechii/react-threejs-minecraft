@@ -13,6 +13,7 @@ interface State {
   cubes: Cube[];
   addCube: (x: number, y: number, z: number) => void;
   removeCube: (x: number, y: number, z: number) => void;
+  setTexture: (texture: Texture) => void;
 }
 
 export const useStore = create<State>()(set => ({
@@ -27,7 +28,9 @@ export const useStore = create<State>()(set => ({
       cubes: prev.cubes.filter(c => c.position[0] !== x || c.position[1] !== y || c.position[2] !== z)
     }));
   },
-  setTexture: () => {},
+  setTexture: texture => {
+    set(prev => ({ ...prev, texture }));
+  },
   saveWorld: () => {},
   resetWorld: () => {}
 }));

@@ -5,6 +5,7 @@ import Player from "./components/Player";
 import Ground from "./components/Ground";
 import FPV from "./components/FPV";
 import Cubes from "./components/Cubes";
+import TextureSelector from "./components/TextureSelector";
 
 const sunPosition = [100, 100, 20] as const;
 const lightIntensity = 0.5 as const;
@@ -23,6 +24,7 @@ const App = () => {
         </Physics>
       </Canvas>
       <div className="cursor absolute centered">+</div>
+      <TextureSelector />
     </>
   );
 };
