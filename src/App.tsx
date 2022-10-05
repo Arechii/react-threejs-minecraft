@@ -4,6 +4,7 @@ import { Canvas } from "@react-three/fiber";
 import Player from "./components/Player";
 import Ground from "./components/Ground";
 import FPV from "./components/FPV";
+import Cubes from "./components/Cubes";
 
 const sunPosition = [100, 100, 20] as const;
 const lightIntensity = 0.5 as const;
@@ -17,6 +18,7 @@ const App = () => {
         <FPV />
         <Physics>
           <Player />
+          <Cubes />
           <Ground />
         </Physics>
       </Canvas>
