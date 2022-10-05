@@ -4,10 +4,10 @@ import { groundTexture } from "../textures";
 
 const dimensions: Vector2Tuple = [100, 100];
 const position: Vector3Tuple = [0, 0, 0];
-const rotation: Vector3Tuple = [-Math.PI / 4, 0, 0];
+const rotation: Vector3Tuple = [-Math.PI / 2, 0, 0];
 
 const Ground = () => {
-  const [ref] = usePlane(() => ({ position, rotation })) as any;
+  const [ref] = usePlane(() => ({ position, rotation }));
 
   groundTexture.magFilter = NearestFilter;
   groundTexture.wrapS = RepeatWrapping;
@@ -15,7 +15,7 @@ const Ground = () => {
   groundTexture.repeat.set(100, 100);
 
   return (
-    <mesh ref={ref}>
+    <mesh ref={ref as any}>
       <planeGeometry attach="geometry" args={dimensions} />
       <meshStandardMaterial attach="material" map={groundTexture} />
     </mesh>
