@@ -1,6 +1,6 @@
 import { useBox } from "@react-three/cannon";
 import { ThreeEvent } from "@react-three/fiber";
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useStore } from "../hooks/useStore";
 import textures from "../textures";
 import { Texture } from "../types";
@@ -14,6 +14,7 @@ interface CubeProps {
 const Cube = ({ position, texture: textureProp }: CubeProps) => {
   const [ref] = useBox(() => ({ type: "Static", position }));
   const [addCube, removeCube] = useStore(state => [state.addCube, state.removeCube]);
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleClick = useCallback(
     (e: ThreeEvent<MouseEvent>) => {
@@ -46,15 +47,31 @@ const Cube = ({ position, texture: textureProp }: CubeProps) => {
     [addCube, removeCube, ref]
   );
 
+  const handleHover = useCallback((e: ThreeEvent<PointerEvent>, state: boolean) => {
+    e.stopPropagation();
+    setIsHovered(state);
+  }, []);
+
   const texture = useMemo(() => {
     const type = getEnumKey(Texture, textureProp);
     return type ? textures[type as keyof typeof Texture] : null;
   }, [textureProp]);
 
   return (
-    <mesh ref={ref as any} onClick={handleClick}>
+    <mesh
+      ref={ref as any}
+      onClick={handleClick}
+      onPointerMove={e => handleHover(e, true)}
+      onPointerOut={e => handleHover(e, false)}
+    >
       <boxGeometry attach="geometry" />
-      <meshStandardMaterial attach="material" map={texture} />
+      <meshStandardMaterial
+        attach="material"
+        map={texture}
+        color={isHovered ? "grey" : "white"}
+        transparent={true}
+        opacity={textureProp === Texture.Glass ? 0.6 : 1}
+      />
     </mesh>
   );
 };
