@@ -4,7 +4,7 @@ import { useCallback, useMemo } from "react";
 import { useStore } from "../hooks/useStore";
 import textures from "../textures";
 import { Texture } from "../types";
-import { getEnum } from "../util";
+import { getEnumKey } from "../util";
 
 interface CubeProps {
   position: [number, number, number];
@@ -47,8 +47,8 @@ const Cube = ({ position, texture: textureProp }: CubeProps) => {
   );
 
   const texture = useMemo(() => {
-    const type = getEnum<Texture>(Texture, textureProp);
-    return type ? textures[type] : null;
+    const type = getEnumKey(Texture, textureProp);
+    return type ? textures[type as keyof typeof Texture] : null;
   }, [textureProp]);
 
   return (

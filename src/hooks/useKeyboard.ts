@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { getEnum } from "../util";
+import { getEnumKey } from "../util";
 
 enum Action {
   MoveForward = "KeyW",
@@ -29,14 +29,14 @@ export const useKeyboard = () => {
   });
 
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
-    const action = getEnum<Action>(Action, e.code);
+    const action = getEnumKey(Action, e.code);
     if (!action) return;
 
     setActions(prev => ({ ...prev, [action]: true }));
   }, []);
 
   const handleKeyUp = useCallback((e: KeyboardEvent) => {
-    const action = getEnum<Action>(Action, e.code);
+    const action = getEnumKey(Action, e.code);
     if (!action) return;
 
     setActions(prev => ({ ...prev, [action]: false }));

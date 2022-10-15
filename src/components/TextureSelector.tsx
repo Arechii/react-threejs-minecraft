@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useKeyboard } from "../hooks/useKeyboard";
 import { useStore } from "../hooks/useStore";
 import { Texture } from "../types";
-import { getEnum } from "../util";
+import { getEnumKey } from "../util";
 
 const images = {
   [Texture.Dirt]: "dirt.jpg",
@@ -38,7 +38,7 @@ const TextureSelector = () => {
 
     const pressedTexture = Object.entries(textures).find(([_, v]) => v);
     if (!pressedTexture) return;
-    const texture = getEnum<Texture>(Texture, Number.parseInt(pressedTexture[0]));
+    const texture = Texture[getEnumKey(Texture, Number.parseInt(pressedTexture[0])) as keyof typeof Texture];
     if (!texture) return;
 
     setActiveTexture(texture);
@@ -49,7 +49,7 @@ const TextureSelector = () => {
       {visible && (
         <div className="absolute centered texture-selector">
           {Object.entries(images).map(([k, v]) => (
-            <img key={k} className="active" src={`/images/${v}`} alt={k} />
+            <img key={k} className={`${k === activeTexture.toString() ? "active" : ""}`} src={`/images/${v}`} alt={k} />
           ))}
         </div>
       )}
