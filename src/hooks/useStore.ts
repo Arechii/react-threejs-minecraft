@@ -30,7 +30,5 @@ export const useStore = create<State>()(set => ({
   },
   setTexture: texture => {
     set(prev => ({ ...prev, texture }));
-  },
-  saveWorld: () => {},
-  resetWorld: () => {}
+  }
 }));
