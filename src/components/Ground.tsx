@@ -6,7 +6,7 @@ import { useStore } from "../hooks/useStore";
 import { groundTexture } from "../textures";
 
 const dimensions: Vector2Tuple = [100, 100];
-const position: Vector3Tuple = [0, 0.5, 0];
+const position: Vector3Tuple = [0, -0.5, 0];
 const rotation: Vector3Tuple = [-Math.PI / 2, 0, 0];
 
 const Ground = () => {
