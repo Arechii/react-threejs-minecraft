@@ -37,9 +37,9 @@ const TextureSelector = () => {
     };
 
     const pressedTexture = Object.entries(textures).find(([_, v]) => v);
-    if (!pressedTexture) return;
+    if (pressedTexture == null) return;
     const texture = Texture[getEnumKey(Texture, Number.parseInt(pressedTexture[0])) as keyof typeof Texture];
-    if (!texture) return;
+    if (texture == null) return;
 
     setActiveTexture(texture);
   }, [Key1, Key2, Key3, Key4, Key5, setActiveTexture]);

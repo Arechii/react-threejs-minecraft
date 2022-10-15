@@ -30,14 +30,14 @@ export const useKeyboard = () => {
 
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     const action = getEnumKey(Action, e.code);
-    if (!action) return;
+    if (action == null) return;
 
     setActions(prev => ({ ...prev, [action]: true }));
   }, []);
 
   const handleKeyUp = useCallback((e: KeyboardEvent) => {
     const action = getEnumKey(Action, e.code);
-    if (!action) return;
+    if (action == null) return;
 
     setActions(prev => ({ ...prev, [action]: false }));
   }, []);
