@@ -1,5 +1,5 @@
 import { Physics } from "@react-three/cannon";
-import { Sky } from "@react-three/drei";
+import { Sky, Stats } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import Player from "./components/Player";
 import Ground from "./components/Ground";
@@ -22,6 +22,7 @@ const App = () => {
           <Cubes />
           <Ground />
         </Physics>
+        <Stats />
       </Canvas>
       <div className="cursor absolute centered">+</div>
       <TextureSelector />
